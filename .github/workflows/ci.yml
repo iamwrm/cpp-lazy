@@ -18,6 +18,7 @@ env:
 jobs:
   gcc:
     strategy:
+      fail-fast: false
       matrix:
         version: [9, 10, 11]
         standard: [11, 20]
@@ -69,6 +70,7 @@ jobs:
 
   clang:
     strategy:
+      fail-fast: false
       matrix:
         version: [9, 11, 12]
         standard: [11, 20]
