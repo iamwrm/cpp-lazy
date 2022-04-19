@@ -34,7 +34,7 @@ jobs:
         id: cores
 
       - name: Install GCC ${{ matrix.version }}
-        run: sudo apt-get install -y
+        run: apt-get install -y
           gcc-${{ matrix.version }} g++-${{ matrix.version }} cmake
 
       - name: Configure (install)
@@ -74,6 +74,8 @@ jobs:
         standard: [11, 20]
 
     runs-on: ubuntu-latest
+    container:
+      image: debian:sid
 
     steps:
       - uses: actions/checkout@v1
@@ -82,7 +84,7 @@ jobs:
         id: cores
 
       - name: Install Clang ${{ matrix.version }}
-        run: sudo apt-get install -y clang-${{ matrix.version }}
+        run: apt-get install -y clang-${{ matrix.version }} cmake
 
       - name: Configure (install)
         env:
