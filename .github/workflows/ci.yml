@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [9, 10, 11]
+        version: [ 10, 11,12]
         standard: [11, 20]
 
     runs-on: ubuntu-latest
@@ -75,7 +75,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [9, 11, 12]
+        version: [11, 12,13,14]
         standard: [11, 20]
 
     runs-on: ubuntu-latest
