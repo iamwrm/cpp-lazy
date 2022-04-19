@@ -24,6 +24,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    container:
+      image: debian:sid
+
     steps:
       - uses: actions/checkout@v1
 
@@ -32,7 +35,7 @@ jobs:
 
       - name: Install GCC ${{ matrix.version }}
         run: sudo apt-get install -y
-          gcc-${{ matrix.version }} g++-${{ matrix.version }}
+          gcc-${{ matrix.version }} g++-${{ matrix.version }} cmake
 
       - name: Configure (install)
         env:
@@ -112,45 +115,6 @@ jobs:
       - name: Run tests
         working-directory: build/tests
         run: ctest -VV -j ${{ steps.cores.outputs.plus_one }}
-
-  msvc:
-    strategy:
-      matrix:
-        os: [ windows-2019, windows-2022]
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - uses: actions/checkout@v1
-
-      - uses: friendlyanon/fetch-core-count@v1
-        id: cores
-
-      - name: Configure (install)
-        run: cmake -S . -B build/install
-          -D CMAKE_BUILD_TYPE:STRING=Release
-          -D CMAKE_INSTALL_PREFIX=build/prefix
-
-      - name: Build (install)
-        run: cmake --build build/install --config Release
-          -j ${{ steps.cores.outputs.plus_one }}
-
-      - name: Install
-        run: cmake --install build/install --config Release
-
-      - name: Configure tests
-        run: cmake -S tests -B build/tests
-          -D CPP-LAZY_CATCH_VERSION:STRING=2.13.6
-          -D TEST_INSTALLED_VERSION:BOOL=YES
-          -D CMAKE_INSTALL_PREFIX=build/prefix
-
-      - name: Build tests
-        run: cmake --build build/tests --config Release
-          -j ${{ steps.cores.outputs.plus_one }}
-
-      - name: Run tests
-        working-directory: build/tests
-        run: ctest -C Release -VV -j ${{ steps.cores.outputs.plus_one }}
 
   examples:
     runs-on: ubuntu-latest
