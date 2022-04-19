@@ -35,7 +35,7 @@ jobs:
 
       - name: Install GCC ${{ matrix.version }}
         run: apt-get update && apt-get install -y
-          gcc-${{ matrix.version }} g++-${{ matrix.version }} cmake
+          gcc-${{ matrix.version }} g++-${{ matrix.version }} cmake git
 
       - name: Configure (install)
         env:
@@ -84,7 +84,7 @@ jobs:
         id: cores
 
       - name: Install Clang ${{ matrix.version }}
-        run: apt-get update && apt-get install -y clang-${{ matrix.version }} cmake
+        run: apt-get update && apt-get install -y clang-${{ matrix.version }} cmake git
 
       - name: Configure (install)
         env:
