@@ -94,7 +94,7 @@ jobs:
       - name: Configure (install)
         env:
           CC: clang-${{ matrix.version }}
-          CXX: clang-${{ matrix.version }}
+          CXX: clang++-${{ matrix.version }}
         run: cmake -S . -B build/install
           -D CMAKE_CXX_STANDARD:STRING=${{ matrix.standard }}
           -D CMAKE_BUILD_TYPE:STRING=Release
@@ -110,7 +110,7 @@ jobs:
       - name: Configure tests
         env:
           CC: clang-${{ matrix.version }}
-          CXX: clang-${{ matrix.version }}
+          CXX: clang++-${{ matrix.version }}
         run: cmake -S tests -B build/tests
           -D CMAKE_BUILD_TYPE:STRING=Release
           -D CPP-LAZY_CATCH_VERSION:STRING=2.13.6
