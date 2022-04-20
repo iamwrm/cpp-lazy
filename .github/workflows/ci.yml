@@ -89,7 +89,7 @@ jobs:
         id: cores
 
       - name: Install Clang ${{ matrix.version }}
-        run: apt-get update && apt-get install -y clang-${{ matrix.version }} cmake git
+        run: sudo apt-get update && sudo apt-get install -y clang-${{ matrix.version }} cmake git
 
       - name: Configure (install)
         env:
