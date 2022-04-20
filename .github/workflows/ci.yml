@@ -79,8 +79,8 @@ jobs:
         standard: [11, 20]
 
     runs-on: ubuntu-latest
-    # container:
-    #   image: debian:sid
+    container:
+      image: debian:sid
 
     steps:
       - uses: actions/checkout@v1
@@ -89,7 +89,7 @@ jobs:
         id: cores
 
       - name: Install Clang ${{ matrix.version }}
-        run: sudo apt-get update && sudo apt-get install -y clang-${{ matrix.version }} cmake git
+        run: apt-get update && apt-get install -y clang-${{ matrix.version }} cmake git
 
       - name: Configure (install)
         env:
